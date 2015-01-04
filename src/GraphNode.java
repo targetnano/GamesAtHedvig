@@ -6,18 +6,23 @@ public class GraphNode<T>
 {
 	private T value_;
 	private List<GraphNode<T>> neighbors_ = new ArrayList<GraphNode<T>>();
+	private boolean visited_;
 	public enum color 
 	{
 		UNCOLORED,
 		RED,
 		BLUE
 	}
-	private color c_;
+	private color c_ = color.UNCOLORED;
+	
+	public GraphNode()
+	{
+		
+	}
 	
 	public GraphNode(T val)
 	{
 		value_ = val;
-		c_ = color.UNCOLORED;
 	}
 	
 	public boolean isColored()
@@ -48,5 +53,15 @@ public class GraphNode<T>
 	public color color()
 	{
 		return c_;
+	}
+	
+	public void visit()
+	{
+		visited_ = true;
+	}
+	
+	public boolean visited()
+	{
+		return visited_;
 	}
 }
