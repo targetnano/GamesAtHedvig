@@ -2,6 +2,11 @@
 public class Interleavings 
 {
 
+	/**
+	 * Prints all possible interleavings of two given strings
+	 * @param a
+	 * @param b
+	 */
 	private static void printInterLeavings(String a, String b)
 	{
 	    int interLength = a.length() + b.length();
@@ -34,6 +39,14 @@ public class Interleavings
 	    }
 	}
 	
+	/**
+	 * Checks if the given string is interleaved of two other strings
+	 * 
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @return
+	 */
 	private static boolean isInterleaved(String a, String b, String c)
 	{
 	    boolean[][] matrix = new boolean[a.length()+1][b.length()+1];
