@@ -37,8 +37,24 @@ public class LongestCommonSubstring
 	    return longestCommonSubstring;
 	}
 	
+	private static int lcsRec(int i, int j, int curLen, String a, String b)
+	{
+		if(i == 0 || j == 0)
+			return curLen;
+		
+		
+		if(a.charAt(i-1) == b.charAt(j-1))
+			return lcsRec(i-1, j-1, 1+curLen, a, b);
+		else
+		{
+			int newLen = Math.max(lcsRec(i-1, j, 0, a, b) , lcsRec(i, j-1, 0, a, b));
+			return Math.max(newLen, curLen);
+		}
+	}
+	
 	public static void main(String[] args)
 	{
-		System.out.println(longestCommonSubstring("abc", "abc"));
+		//System.out.println(lcsRec(5, 5, 0, "sabxc", "xabdc"));
+		System.out.println(lcsRec(7, 9, 0, "xabcxxd", "kkkabczzd"));
 	}
 }
