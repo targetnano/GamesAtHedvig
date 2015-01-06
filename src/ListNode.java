@@ -24,4 +24,16 @@ public class ListNode
 	{
 		next_ = next;
 	}
+	
+	public int length()
+	{
+		int length = 0;
+		ListNode temp = this;
+		while(temp != null)
+		{
+			temp = temp.next();
+			length++;
+		}
+		return length;
+	}
 }
