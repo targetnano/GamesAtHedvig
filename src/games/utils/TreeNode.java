@@ -36,4 +36,18 @@ public class TreeNode
 	{
 		right_ = node;
 	}
+	
+	public static void printInorder(TreeNode node)
+	{
+		if(node == null)
+			return;
+		printInorder(node.left());
+		System.out.println(node.value());
+		printInorder(node.right());
+	}
+	
+	public String toString()
+	{
+		return Integer.toString(val_);
+	}
 }
