@@ -1,3 +1,6 @@
+package games.core;
+import games.utils.GraphNode;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;

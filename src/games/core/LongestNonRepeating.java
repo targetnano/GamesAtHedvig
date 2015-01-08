@@ -1,3 +1,4 @@
+package games.core;
 import java.util.Arrays;
 
 

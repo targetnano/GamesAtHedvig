@@ -1,3 +1,4 @@
+package games.utils;
 
 public class ArrayUtils
 {

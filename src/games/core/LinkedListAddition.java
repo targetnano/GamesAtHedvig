@@ -1,3 +1,7 @@
+package games.core;
+import games.utils.ListNode;
+import games.utils.Pair;
+
 
 public class LinkedListAddition 
 {

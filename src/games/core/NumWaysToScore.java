@@ -1,3 +1,4 @@
+package games.core;
 /**
  * Given a set of scores and a final score, it finds
  * the number of ways the team could get to that score.

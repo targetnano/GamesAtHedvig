@@ -1,3 +1,4 @@
+package games.core;
 
 /*
  * Given an array of integers where each element represents the max number of 

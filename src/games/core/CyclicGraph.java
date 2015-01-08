@@ -1,3 +1,6 @@
+package games.core;
+import games.utils.GraphNode;
+
 
 public class CyclicGraph {
 

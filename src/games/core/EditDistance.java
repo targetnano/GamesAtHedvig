@@ -1,3 +1,4 @@
+package games.core;
 
 public class EditDistance 
 {
