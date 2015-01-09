@@ -28,4 +28,14 @@ public class NaryTreeNode
 	{
 		return value_;
 	}
+	
+	public int numChildren()
+	{
+		return children_.size();
+	}
+	
+	public String toString()
+	{
+		return value_ + ":" + children_;
+	}
 }
