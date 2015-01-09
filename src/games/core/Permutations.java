@@ -24,8 +24,33 @@ public class Permutations {
 	    }
 	}
 	
+	private static void permute2(String str)
+	{
+	    char[] buffer = new char[str.length()];
+	    boolean[] used = new boolean[str.length()];
+	    permute2Helper(0, str, buffer, used);
+	}
+
+	private static void permute2Helper(int index, String str, char[] buffer, boolean[] used)
+	{
+	    if(index == buffer.length)
+	    {
+	        String perm = new String(buffer);
+	        System.out.println(perm);
+	        return;
+	    }
+	    for(int i = 0; i < str.length(); i++)
+	    {
+	        if(used[i])
+	            continue;
+	        buffer[index] = str.charAt(i);
+	        used[i] = true;
+	        permute2Helper(index+1, str, buffer, used);
+	        used[i] = false;
+	    }
+	}
 	public static void main(String[] args)
 	{
-		permute1("abcd");
+		permute2("abc");
 	}
 }
