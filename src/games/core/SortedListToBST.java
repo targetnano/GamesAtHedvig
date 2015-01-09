@@ -22,10 +22,10 @@ public class SortedListToBST
 	        int mid = start + (end - start) / 2;
 	        TreeNode left = listToBst(start, mid-1);
 	        TreeNode curNode = new TreeNode(head.value());
-	        curNode.setLeft(left);
+	        curNode.left(left);
 	        head = head.next();
 	        TreeNode right = listToBst(mid+1, end);
-	        curNode.setRight(right);
+	        curNode.right(right);
 	        return curNode;
 	    }
 	    else

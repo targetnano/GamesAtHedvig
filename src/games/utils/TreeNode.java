@@ -27,12 +27,20 @@ public class TreeNode
 		return right_;
 	}
 	
-	public void setLeft(TreeNode node)
+	public TreeNode cloneRight()
+	{
+		if(right_ == null)
+			return null;
+		else
+			return new TreeNode(right_.val_);
+	}
+	
+	public void left(TreeNode node)
 	{
 		left_ = node;
 	}
 	
-	public void setRight(TreeNode node)
+	public void right(TreeNode node)
 	{
 		right_ = node;
 	}
