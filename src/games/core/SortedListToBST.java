@@ -37,8 +37,8 @@ public class SortedListToBST
 		ListNode n1 = new ListNode(1);
 		ListNode n2 = new ListNode(2);
 		ListNode n3 = new ListNode(3);
-		n1.setNext(n2);
-		n2.setNext(n3);
+		n1.next(n2);
+		n2.next(n3);
 		TreeNode root = listToBst(n1);
 		TreeNode.printInorder(root);
 	}

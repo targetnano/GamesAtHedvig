@@ -65,4 +65,9 @@ public class GraphNode<T>
 	{
 		return visited_;
 	}
+	
+	public String toString()
+	{
+		return value_ + ":" + visited_;
+	}
 }

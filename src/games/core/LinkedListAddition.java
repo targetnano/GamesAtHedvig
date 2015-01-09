@@ -33,7 +33,7 @@ public class LinkedListAddition
 	    {
 	        ListNode node = new ListNode(pair.v());
 	        head = node;
-	        node.setNext(pair.k());
+	        node.next(pair.k());
 	    }
 	    return head;
 	}
@@ -59,7 +59,7 @@ public class LinkedListAddition
 	    int carry = sum / 10;
 	    pair.v(carry);
 	    ListNode node = new ListNode(digit);
-	    node.setNext(pair.k());
+	    node.next(pair.k());
 	    pair.k(node);
 	    return pair;
 	}
@@ -73,10 +73,10 @@ public class LinkedListAddition
 		ListNode n5 = new ListNode(3);
 		ListNode n6 = new ListNode(5);
 		
-		n1.setNext(n2);
-		n2.setNext(n5);
-		n5.setNext(n6);
-		n3.setNext(n4);
+		n1.next(n2);
+		n2.next(n5);
+		n5.next(n6);
+		n3.next(n4);
 		ListNode result = addLists(n1, n3);
 		
 		while(result != null)

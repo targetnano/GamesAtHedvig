@@ -21,7 +21,7 @@ public class ListNode
 		return next_;
 	}
 	
-	public void setNext(ListNode next)
+	public void next(ListNode next)
 	{
 		next_ = next;
 	}
@@ -36,5 +36,10 @@ public class ListNode
 			length++;
 		}
 		return length;
+	}
+	
+	public String toString()
+	{
+		return Integer.toString(val_);
 	}
 }
