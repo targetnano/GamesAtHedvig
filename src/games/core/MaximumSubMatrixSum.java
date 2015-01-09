@@ -1,5 +1,7 @@
 package games.core;
 
+import games.utils.Pair;
+
 public class MaximumSubMatrixSum 
 {
 
@@ -18,12 +20,56 @@ public class MaximumSubMatrixSum
 	    }
 	    return max_so_far;
 	}
+	
+	private static Pair<Integer, Pair<Integer,Integer>> kadaneReturnFriendly(int[] buffer)
+	{
+		int globalMax = Integer.MIN_VALUE, curMax = 0;
+		int start = -1, end = -1;
+		
+		int i = 0;
+		for(int x : buffer)
+		{
+			curMax += x;
+			if(curMax < 0)
+			{
+				curMax = 0;
+				start = i+1;
+			}
+			else if(curMax > globalMax)
+			{
+				end = i;
+				globalMax = curMax;
+			}
+			i++;
+		}
+		
+		if(end != -1)
+		{
+			Pair<Integer,Integer> pair = new Pair<Integer,Integer>(start, end);
+			Pair<Integer, Pair<Integer,Integer>> result = new Pair<Integer, Pair<Integer, Integer>>(globalMax, pair);
+			return result;
+		}
+		
+		for(i = 0; i < buffer.length; i++)
+		{
+			if(buffer[i] > globalMax)
+			{
+				globalMax = buffer[i];
+				start = i;
+				end = i;
+			}
+		}
+		Pair<Integer,Integer> pair = new Pair<Integer,Integer>(start, end);
+		Pair<Integer, Pair<Integer,Integer>> result = new Pair<Integer, Pair<Integer, Integer>>(globalMax, pair);
+		return result;
+	}
 
 	private static int largestSubmatrixSum(int[][] matrix)
 	{
 	    int max = Integer.MIN_VALUE;
 	    int rows = matrix.length;
 	    int columns = matrix[0].length;
+	    int left = -1, right = -1;
 
 	    // Uber point: Apply kadane to all cumulative
 	    // columns to n, from 0 to n.
@@ -37,7 +83,11 @@ public class MaximumSubMatrixSum
 
 	            int curMax = kadane(buffer);
 	            if(curMax > max)
+	            {
 	                max = curMax;
+	                left = i;
+	                right = j;
+	            }
 	        }
 	    }
 	    return max;
