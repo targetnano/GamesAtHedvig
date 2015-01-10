@@ -23,6 +23,7 @@ public class BSTToCircularDList
 	    root.left(prev_);
 	    head_.left(root);
 
+	    // IMPORTANT: HAVE TO save this right node
 	    TreeNode right = root.cloneRight();
 	    root.right(head_);
 	    prev_ = root;
