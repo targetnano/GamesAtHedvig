@@ -58,4 +58,9 @@ public class TreeNode
 	{
 		return Integer.toString(val_);
 	}
+	
+	public boolean equals(TreeNode n)
+	{
+		return val_ == n.value();
+	}
 }
