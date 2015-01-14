@@ -8,44 +8,40 @@ import java.util.List;
 public class MergeIntervals 
 {
 
-	private static List<Interval> mergeIntervals(List<Interval> intervals, Interval newInterval)
+	private static List<Interval> mergeIntervals(List<Interval> intervals)
 	{
+	    if(intervals.size() <= 1)
+	        return intervals;
+
 	    List<Interval> result = new ArrayList<Interval>();
-	    for(Interval interval : intervals)
+	    Interval curInterval = intervals.get(0);
+	    for(int i = 1; i < intervals.size(); i++)
 	    {
-	        if(interval.right() < newInterval.left())
+	        Interval interval = intervals.get(i);
+	        if(interval.left() > curInterval.right())
 	        {
-	            result.add(interval);
-	        }
-	        else if(interval.left() > newInterval.right())
-	        {
-	            result.add(newInterval);
-	            newInterval = interval;
+	            result.add(curInterval);
+	            curInterval = interval;
 	        }
 	        else
-	        {
-	            newInterval = new Interval(Math.min(interval.left(), newInterval.left()), Math.max(interval.right(), newInterval.right()));
-	        }
+	            curInterval = new Interval(curInterval.left(), Math.max(curInterval.right(), interval.right()));
 	    }
-	    result.add(newInterval);
+	    result.add(curInterval);
 	    return result;
 	}
 	
 	public static void main(String[] args)
 	{
-		Interval a = new Interval(1,2);
-		Interval b = new Interval(3,5);
-		Interval c = new Interval(6,7);
-		Interval d = new Interval(8,10);
-		Interval e = new Interval(12,16);
-		Interval newInterval = new Interval(4,9);
-		
+		Interval a = new Interval(1,3);
+		Interval b = new Interval(2,6);
+		Interval c = new Interval(8,10);
+		Interval d = new Interval(15,18);
+
 		List<Interval> list = new ArrayList<Interval>();
 		list.add(a);
 		list.add(b);
 		list.add(c);
 		list.add(d);
-		list.add(e);
-		System.out.println(mergeIntervals(list, newInterval));
+		System.out.println(mergeIntervals(list));
 	}
 }
