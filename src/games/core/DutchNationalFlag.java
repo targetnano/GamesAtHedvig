@@ -14,7 +14,7 @@ public class DutchNationalFlag
 	    int small = 0;
 	    int large = array.length - 1;
 
-	    while(small < large)
+	    while(i < large)
 	    {
 	        if(array[i] == x)
 	        {
@@ -37,7 +37,7 @@ public class DutchNationalFlag
 	
 	public static void main(String[] args)
 	{
-		int[] array = {2};
+		int[] array = {1,8,2,8,0,4,1,2};
 		formDutchFlag(array, 2);
 		ArrayUtils.printArray(array);
 	}

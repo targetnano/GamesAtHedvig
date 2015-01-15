@@ -53,7 +53,7 @@ public class PartitionList
 	
 	public static void main(String[] args)
 	{
-		ListNode a = new ListNode(1);
+		ListNode a = new ListNode(6);
 		ListNode b = new ListNode(4);
 		ListNode c = new ListNode(3);
 		ListNode d = new ListNode(2);
