@@ -10,28 +10,22 @@ public class EditDistance
 	 * @param b
 	 * @return
 	 */
-	private static boolean isOneEditApart(String a, String b)
+	private static boolean isOneEditAway(String s1, String s2)
 	{
-	    if(Math.abs(a.length() - b.length()) > 1)
+	    if(Math.abs(s1.length() - s2.length()) > 1)
 	        return false;
-	    String longer = a;
-	    String shorter = b;
-	    boolean lenUnequal = false;
-	    if(a.length() != b.length())
+
+	    for(int i = 0; i < s2.length() && i < s1.length(); i++)
 	    {
-	        lenUnequal = true;
-	        longer = (a.length() > b.length()) ? a : b;
-	        shorter = a.length() < b.length() ? a : b;
-	    }
-	    for(int i = 0; i < shorter.length(); i++)
-	    {
-	        if(longer.charAt(i) != shorter.charAt(i))
+	        if(s1.charAt(i) != s2.charAt(i))
 	        {
-	            return lenUnequal ? longer.substring(i+1).equals(shorter.substring(i))
-	                              : longer.substring(i+1).equals(shorter.substring(i+1));
+	        	if(s1.length() > s2.length())
+	        		return s1.substring(i+1).equals(s2.substring(i));
+	        	else
+	        		return s1.substring(i+1).equals(s2.substring(i+1));
 	        }
 	    }
-	    return lenUnequal ? true : false;
+	    return s1.length() != s2.length();
 	}
 	
 	/**
@@ -69,6 +63,6 @@ public class EditDistance
 	
 	public static void main(String[] args)
 	{
-		System.out.print(minEditDistance("xyz", "yxz"));
+		System.out.print(isOneEditAway("baa", "baaa"));
 	}
 }
