@@ -25,6 +25,22 @@ public class MaxSumPathInTree
 	    return maxToPassUp;
 	}
 	
+	private static int maxSumPathBetweenLeaves(TreeNode root)
+	{
+	    if(root == null)
+	        return 0;
+
+	    int leftSum = maxSumPathBetweenLeaves(root.left());
+	    int rightSum = maxSumPathBetweenLeaves(root.right());
+
+	    int maxInSubTree = leftSum + rightSum + root.value();
+	    if(maxInSubTree > totalMax)
+	        totalMax = maxInSubTree;
+
+	    int maxToPassUp = Math.max(leftSum, rightSum) + root.value();
+	    return maxToPassUp;
+	}
+	
 	public static void main(String[] args)
 	{
 		/**
@@ -32,7 +48,7 @@ public class MaxSumPathInTree
      			/    \
  			 30       1
  			/  \     /  \ 
-			-5  -44  55  70
+			-5  -44  55  -70
               			/  \
             		   -3   -80
 		 */
@@ -41,7 +57,7 @@ public class MaxSumPathInTree
 		TreeNode n30 = new TreeNode(30);
 		TreeNode n55 = new TreeNode(55);
 		TreeNode n60 = new TreeNode(1);
-		TreeNode n70 = new TreeNode(70);
+		TreeNode n70 = new TreeNode(-70);
 		TreeNode n80 = new TreeNode(-80);
 		TreeNode n65 = new TreeNode(-3);
 		TreeNode n50 = new TreeNode(50);
@@ -55,7 +71,7 @@ public class MaxSumPathInTree
 		n70.left(n65);
 		n70.right(n80);
 
-		maxSumPath(n50);
+		maxSumPathBetweenLeaves(n50);
 		System.out.println(totalMax);
 	}
 }
