@@ -36,12 +36,30 @@ public class WordBreak
 	    return null;
 	}
 	
+	private static boolean isBreakable(String input, Set<String> dict)
+	{
+	    boolean[] breakable = new boolean[input.length()];
+	    if(input.length() == 0)
+	        return false;
+
+	    for(int i = 0; i < input.length(); i++)
+	    {
+	        if( breakable[i] || dict.contains(input.substring(0,i+1)) )
+	        {
+	            breakable[i] = true;
+	            for(int j = i+1; j < input.length(); j++)
+	                breakable[j] = breakable[j] || dict.contains(input.substring(i+1, j+1));
+	        }
+	    }
+	    return breakable[input.length()-1];
+	}
+	
 	public static void main(String args[])
 	{
 		Set<String> dict = new HashSet<String>();
 		dict.add("ab");
 		dict.add("c");
 		dict.add("d");
-		System.out.println(wordBreak("cdab", dict));
+		System.out.println(isBreakable("cdabab", dict));
 	}
 }
