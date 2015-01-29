@@ -22,6 +22,16 @@ public class Interval
 		return right_;
 	}
 	
+	public int compare(Interval interval)
+	{
+		int val = 0;
+		if(left_ < interval.left())
+			val = -1;
+		else if(left_ > interval.left())
+			val = 1;
+		return val;
+	}
+	
 	public String toString()
 	{
 		return left_ + "-" + right_;

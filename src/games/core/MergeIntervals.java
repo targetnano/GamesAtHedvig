@@ -1,8 +1,10 @@
 package games.core;
 
 import games.utils.Interval;
+import games.utils.IntervalComparator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MergeIntervals 
@@ -12,7 +14,8 @@ public class MergeIntervals
 	{
 	    if(intervals.size() <= 1)
 	        return intervals;
-
+	    Collections.sort(intervals, new IntervalComparator());
+	    
 	    List<Interval> result = new ArrayList<Interval>();
 	    Interval curInterval = intervals.get(0);
 	    for(int i = 1; i < intervals.size(); i++)
@@ -38,10 +41,10 @@ public class MergeIntervals
 		Interval d = new Interval(15,18);
 
 		List<Interval> list = new ArrayList<Interval>();
-		list.add(a);
-		list.add(b);
 		list.add(c);
+		list.add(a);
 		list.add(d);
+		list.add(b);
 		System.out.println(mergeIntervals(list));
 	}
 }
