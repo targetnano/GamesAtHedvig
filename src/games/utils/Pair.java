@@ -34,4 +34,9 @@ public class Pair<K, V>
     {
         v_ = v;
     }
+    
+    public String toString()
+    {
+    	return k_ + ":" + v_;
+    }
 }
