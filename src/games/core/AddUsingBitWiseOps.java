@@ -14,8 +14,17 @@ public class AddUsingBitWiseOps
 	    return a;
 	}
 	
+	public static void test()
+	{
+		assert(bitWiseAddition(5,9) == 14);
+		assert(bitWiseAddition(-3,-2) == -5);
+		assert(bitWiseAddition(5,0) == 5);
+		assert(bitWiseAddition(10,-2) == 8);
+		System.out.println("PASSED!");
+	}
+	
 	public static void main(String[] args)
 	{
-		System.out.println(bitWiseAddition(5,9));
+		test();
 	}
 }

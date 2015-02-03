@@ -54,6 +54,6 @@ public class LongestNonRepeating {
 	
 	public static void main(String[] args)
 	{
-		System.out.println(longestNonRepeating("geeksforgeeks"));
+		System.out.println(longestNonRepeating("atabbdt"));
 	}
 }
