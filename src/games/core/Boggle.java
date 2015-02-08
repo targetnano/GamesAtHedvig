@@ -41,13 +41,27 @@ public class Boggle
 	    return false;
 	}
 	
-	public static void main(String[] args) {
+	private static void test()
+	{
 		char[][] grid = { {'c','f','s','t'},
-						  {'g','h','s','o'},
-						  {'a','p','y','e'},
-						  {'h','i','w','b'}
-						};
+				{'g','h','s','o'},
+				{'a','p','y','e'},
+				{'h','i','w','b'}
+				};
 		boolean[][] visited = new boolean[grid.length][grid[0].length];
-		System.out.println(boggle("bespi", grid, visited));
+		assert(boggle("bespi", grid, visited));
+		
+		visited = new boolean[grid.length][grid[0].length];
+		assert(boggle("oebwihpsy", grid, visited));
+		
+		visited = new boolean[grid.length][grid[0].length];
+		assert(boggle("hpiwes", grid, visited));
+
+		System.out.println("PASSED!");
+	}
+	
+	public static void main(String[] args) 
+	{
+		test();
 	}
 }
