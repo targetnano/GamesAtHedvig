@@ -52,9 +52,44 @@ public class StockBuySell
 	    return profit;
 	}
 	
+	/**
+	 * http://fenghaolw.blogspot.com/2012/11/best-time-to-buy-and-sell-stock-iii.html?view=sidebar
+	 * Similar to trapping rain water
+	 * @param prices
+	 * @return
+	 */
+	private static int getProfitFrom2Txns(int[] prices)
+	{
+	    if(prices == null || prices.length < 2)
+	        return 0;
+	    
+	    int[] leftToRightMax = new int[prices.length];
+	    int leftMin = prices[0];
+	    for(int i = 1; i < leftToRightMax.length; i++)
+	    {
+	        leftMin = Math.min(leftMin, prices[i]);
+	        leftToRightMax[i] = Math.max(leftToRightMax[i-1], prices[i] - leftMin);
+	    }
+	    
+	    int[] rightToLeftMax = new int[prices.length];
+	    int rightMax = prices[prices.length - 1];
+	    for(int i = prices.length - 2; i >= 0; i--)
+	    {
+	        rightMax = Math.max(rightMax, prices[i]);
+	        rightToLeftMax[i] = Math.max(rightToLeftMax[i+1], rightMax - prices[i]);
+	    }
+	    
+	    int maxProfit = 0;
+	    for(int i = 0; i < prices.length; i++)
+	    {
+	        maxProfit = Math.max(maxProfit, rightToLeftMax[i]+leftToRightMax[i]);
+	    }
+	    return maxProfit;
+	}
+	
 	public static void main(String[] args)
 	{
-		int[] prices = {1,1,1,2,2,2,2,1,1,1,2,2,2};
-		System.out.println(getProfitMultipleTxns(prices, 0, prices.length-1));
+		int[] prices = {4,3,1,9,2,11,1,6};
+		System.out.println(getProfitFrom2Txns(prices));
 	}
 }
