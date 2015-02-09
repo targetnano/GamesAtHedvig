@@ -10,22 +10,17 @@ public class PalindromicPartitioning
 	private static boolean[][] getPalindromeTable(String str)
 	{
 	    boolean[][] table = new boolean[str.length()][str.length()];
-	    for(int i = 0; i < table.length; i++)
-	        table[i][i] = true;
 	    
-	    for(int i = 0; i < table.length; i++)
+	    for(int gap = 0; gap <= str.length()-1; gap++)
 	    {
-	        for(int j = 0; j < table[0].length; j++)
-	        {
-	            boolean equal = str.charAt(i) == str.charAt(j);
-	            if( i+1 > j-1)
-	            {
-	                if(equal)
-	                    table[i][j] = true;
-	            }
-	            else if( table[i+1][j-1] && equal)
-	                table[i][j] = true;
-	        }
+	    	for(int i = 0; i < str.length()-gap; i++)
+	    	{
+	    		int j = i+gap;
+	    		if(gap <= 1)
+	    			table[i][j] = str.charAt(i) == str.charAt(j);
+	    		else if(str.charAt(i) == str.charAt(j) && table[i+1][j-1])
+	    			table[i][j] = true;
+	    	}
 	    }
 	    return table;
 	}
@@ -97,6 +92,28 @@ public class PalindromicPartitioning
 	    return map.get(0);
 	}
 	
+	private static int getMinCuts(String str)
+	{
+	    boolean[][] table = getPalindromeTable(str);
+	    int[] minCuts = new int[str.length()];
+	    
+	    for(int i = str.length()-1; i >= 0; i--)
+	    {
+	        minCuts[i] = str.length() - i -1;
+	        for(int j = i; j < str.length(); j++)
+	        {
+	        	if(table[i][j])
+	        	{
+	        		if(j == str.length()-1)
+	        			minCuts[i] = 0;
+	        		else
+	        			minCuts[i] = Math.min(minCuts[i], 1+minCuts[j+1]);
+	        	}
+	        }
+	    }
+	    return minCuts[0];
+	}
+	
 	private static ArrayList<ArrayList<String>> getAllPartitions(String str)
 	{
 	    ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
@@ -107,8 +124,9 @@ public class PalindromicPartitioning
 	
 	public static void main(String[] args)
 	{
-		ArrayList<ArrayList<String>> result = getAllPartitionsItr("cbaba");
+		ArrayList<ArrayList<String>> result = getAllPartitionsItr("bobcococ");
 		for(ArrayList<String> list : result)
 			System.out.println(list);
+		//System.out.println(getMinCuts("bobcococ"));
 	}
 }
