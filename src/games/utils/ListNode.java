@@ -42,4 +42,14 @@ public class ListNode
 	{
 		return Integer.toString(val_);
 	}
+	
+	public void printList()
+	{
+		ListNode temp = this;
+		while(temp != null)
+		{
+			System.out.print(temp.value());
+			temp = temp.next();
+		}
+	}
 }
