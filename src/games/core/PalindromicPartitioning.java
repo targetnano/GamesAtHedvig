@@ -1,6 +1,8 @@
 package games.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PalindromicPartitioning 
 {
@@ -53,6 +55,48 @@ public class PalindromicPartitioning
 	    }
 	}
 
+	/**
+	 * This one is an optimization to avoid recalculating partitions for 
+	 * same substrings
+	 * 
+	 * @param str
+	 * @return
+	 */
+	private static ArrayList<ArrayList<String>> getAllPartitionsItr(String str)
+	{
+	    Map<Integer, ArrayList<ArrayList<String>>> map = new HashMap<Integer, ArrayList<ArrayList<String>>>();
+	    boolean[][] table = getPalindromeTable(str);
+	    
+	    for(int i = str.length()-1; i >= 0; i--)
+	    {
+	        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+	        for(int j = i; j < str.length(); j++)
+	        {
+	            if(table[i][j])
+	            {
+	                if(j == str.length()-1)
+	                {
+	                    ArrayList<String> curPartition = new ArrayList<String>();
+	                    curPartition.add(str.substring(i,j+1));
+	                    result.add(curPartition);
+	                }
+	                else
+	                {
+	                    ArrayList<ArrayList<String>> cachedResult = map.get(j+1);
+	                    for(ArrayList<String> list : cachedResult)
+	                    {
+	                        ArrayList<String> newList = new ArrayList<String>(list);
+	                        newList.add(0, str.substring(i,j+1));
+	                        result.add(newList);
+	                    }
+	                }
+	            }
+	        }
+	        map.put(i, result);   
+	    }
+	    return map.get(0);
+	}
+	
 	private static ArrayList<ArrayList<String>> getAllPartitions(String str)
 	{
 	    ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
@@ -63,7 +107,7 @@ public class PalindromicPartitioning
 	
 	public static void main(String[] args)
 	{
-		ArrayList<ArrayList<String>> result = getAllPartitions("cbaba");
+		ArrayList<ArrayList<String>> result = getAllPartitionsItr("cbaba");
 		for(ArrayList<String> list : result)
 			System.out.println(list);
 	}
