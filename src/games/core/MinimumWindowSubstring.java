@@ -8,7 +8,7 @@ import java.util.Set;
 public class MinimumWindowSubstring 
 {
 
-	private static void minimumWindowSubstring(String pattern, String str)
+	private static int minimumWindowSubstring(String pattern, String str)
 	{
 	    int minLength = Integer.MAX_VALUE;
 	    int left = 0, right = 0;
@@ -27,8 +27,7 @@ public class MinimumWindowSubstring
 
 	            if(map.size() == pattern.length())
 	            {
-	                if( (right-left+1) < minLength )
-	                    minLength = right-left+1;
+	            	minLength = Math.min(minLength, right-left+1);
 	                while(left < right)
 	                {
 	                    ch = str.charAt(left);
@@ -36,8 +35,7 @@ public class MinimumWindowSubstring
 	                    if(remaining != null && remaining == 1)
 	                    {
 	                        map.remove(ch);
-	                        if( (right-left+1) < minLength )
-	                            minLength = right-left+1;
+	    	            	minLength = Math.min(minLength, right-left+1);
 	                        left++;
 	                        break;
 	                    }
@@ -49,14 +47,20 @@ public class MinimumWindowSubstring
 	        }
 	        right++;
 	    }
-	    if( (right-left+1) < minLength )
-            minLength = right-left+1;
-	    
-	    System.out.println(minLength);
+	    return minLength == Integer.MAX_VALUE ? Integer.MAX_VALUE : Math.min(minLength, right-left+1);
 	}
 	
+	private static void test()
+	{
+		assert(minimumWindowSubstring("ab","acvbsshsaf") == 4);
+		assert(minimumWindowSubstring("ab","ab") == 2);
+		assert(minimumWindowSubstring("a", "a") == 1);
+		assert(minimumWindowSubstring("aprlfhlafh","hla") == Integer.MAX_VALUE);
+		assert(minimumWindowSubstring("hla", "aprlfhlafh") == 3);
+		System.out.println("PASSED!");
+	}
 	public static void main(String[] args)
 	{
-		minimumWindowSubstring("ab","acvbsshsaf");
+		test();
 	}
 }
