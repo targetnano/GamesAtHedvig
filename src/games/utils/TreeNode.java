@@ -4,6 +4,7 @@ public class TreeNode
 {
 	
 	private int val_;
+	private int count_;
 	private TreeNode right_;
 	private TreeNode left_;
 	
@@ -12,9 +13,20 @@ public class TreeNode
 		val_ = val;
 	}
 	
+	public TreeNode(int val, int count)
+	{
+		this(val);
+		count_ = count;
+	}
+	
 	public int value()
 	{
 		return val_;
+	}
+	
+	public int count()
+	{
+		return count_;
 	}
 	
 	public TreeNode left()
