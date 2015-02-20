@@ -32,10 +32,10 @@ public class ThreeSum
 						left++;
 						right--;
 
-						while(left < right && array[right-1] == array[right])
+						while(left < right && array[right+1] == array[right])
 							right--;
 
-						while(left < right && array[left+1] == array[left])
+						while(left < right && array[left-1] == array[left])
 							left++;
 					}
 					else if(sum > target)
@@ -50,7 +50,7 @@ public class ThreeSum
 	
 	public static void main(String[] args)
 	{
-		int[] a = {-1,0,1,2,-1,-4};
+		int[] a = {-1,0,1,2,-1,-4,-1,1,2};
 		System.out.println(getZeroSumTriplets(a));
 	}
 }
