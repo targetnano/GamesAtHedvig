@@ -54,12 +54,36 @@ public class WordBreak
 	    return breakable[input.length()-1];
 	}
 	
+	private static boolean wordBreak2(String str, Set<String> dict)
+	{
+	    boolean[] breakable = new boolean[str.length()+1];
+	    breakable[0] = true;
+	    
+	    for(int i = 0; i <= str.length(); i++)
+	    {
+	        if(!breakable[i])
+	            continue;
+	        
+	        for(String dictWord : dict)
+	        {
+	            int curEnd = i + dictWord.length();
+	            if(curEnd > str.length())
+	                continue;
+	            
+	            if(str.substring(i,curEnd).equals(dictWord))
+	                breakable[curEnd] = true;
+	            if(breakable[str.length()])
+	                break;
+	        }
+	    }
+	    return breakable[str.length()];
+	}
 	public static void main(String args[])
 	{
 		Set<String> dict = new HashSet<String>();
 		dict.add("ab");
 		dict.add("c");
 		dict.add("d");
-		System.out.println(isBreakable("cdabab", dict));
+		System.out.println(wordBreak2("cdabab", dict));
 	}
 }
