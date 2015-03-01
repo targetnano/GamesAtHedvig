@@ -3,46 +3,46 @@ package games.core;
 public class SudokuCheck 
 {
 
-	private static boolean checkSudoku(int[][] sudoku)
+	private static boolean isValid(int srcRow, int srcCol, int destRow, int destCol, int[][] sudoku)
 	{
-	    for(int r = 0; r < 9; r++)
+	    boolean[] found = new boolean[10];
+	    for(int r = srcRow; r <= destRow; r++)
 	    {
-	        if(hasDuplicate(r, r, 0, 8, sudoku))
-	            return false;
-	    }
-	    
-	    for(int c = 0; c < 9; c++)
-	    {
-	        if(hasDuplicate(0, 8, c, c, sudoku))
-	            return false;
-	    }
-	    
-	    for(int r = 0; r < 9; r += 3)
-	    {
-	        for(int c = 0; c < 8; c += 3)
+	        for(int c = srcCol; c <= destCol; c++)
 	        {
-	            if(hasDuplicate(r, r+2, c, c+2, sudoku))
+	            int x = sudoku[r][c];
+	            if(found[x])
 	                return false;
+	            else
+	                found[x] = true;
 	        }
 	    }
 	    return true;
 	}
 
-	private static boolean hasDuplicate(int sr, int er, int sc, int ec, int[][] sudoku)
+	private static boolean isValidSudoku(int[][] sudoku)
 	{
-	    boolean[] visited = new boolean[10];
-	    for(int i = sr; i <= er; i++)
+	    for(int r = 0; r <= 8; r++)
 	    {
-	        for(int j = sc; j <= ec; j++)
+	        if(!isValid(r, 0, r, 8, sudoku))
+	            return false;
+	    }
+	    
+	    for(int c = 0; c <= 8; c++)
+	    {
+	        if(!isValid(0, c, 8, c, sudoku))
+	            return false;
+	    }
+	    
+	    for(int r = 0; r < 8; r += 3)
+	    {
+	        for(int c = 0; c < 8; c += 3)
 	        {
-	            int element = sudoku[i][j];
-	            if(visited[element]) 
-	                return true;
-	            else 
-	                visited[element] = true;
+	            if(!isValid(r, c, r+2, c+2, sudoku))
+	                return false;
 	        }
 	    }
-	    return false;
+	    return true;
 	}
 	
 	public static void main(String[] args)
@@ -57,6 +57,6 @@ public class SudokuCheck
 							{1,7,6,8,2,5,4,3,9},
 							{3,2,8,4,1,9,5,6,7}
 							};
-		System.out.println(checkSudoku(sudoku));
+		System.out.println(isValidSudoku(sudoku));
 	}
 }
