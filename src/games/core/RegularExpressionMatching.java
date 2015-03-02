@@ -2,51 +2,38 @@ package games.core;
 
 public class RegularExpressionMatching 
 {
-
-	private static boolean match(int strIdx, String str, int regexIdx, String regex)
+	private static boolean isMatch(String text, String pattern)
 	{
-		// If we are at the end of both strings, it means all the chars
-		// have been successfully matched so far. Return TRUE
-	    if(strIdx == str.length() && regexIdx == regex.length())
-	        return true;
-
-	    // The regex string is fully matched, but there are still chars
-	    // left in the main string unmatched. Return FALSE 
-	    if(regexIdx == regex.length())
-	    	return false;
-
-	    // We are done processing whole string. This can happen only when 
-	    // we have '*' or '+' as the final char. So, if it the case,
-	    // Return TRUE. Otherwise, Return FALSE.
-	    if(strIdx == str.length())
-	    {
-	    	if(regex.charAt(regexIdx) == '*' || regex.charAt(regexIdx) == '+')
-	    		return regexIdx+1 == regex.length();
-	    	else
-	    		return false;
-	    }
+	    if(pattern.length() == 0)
+	        return text.length() == 0;
 	    
-	    // All these are straight-forward cases
-	    if(regex.charAt(regexIdx) == '+')
+	    if(pattern.length() == 1 || pattern.charAt(1) != '*')
 	    {
-	    	if(regex.charAt(regexIdx-1) == str.charAt(strIdx))
-	    		return match(strIdx+1, str, regexIdx, regex);
-	    	else
-	    		return match(strIdx, str, regexIdx+1, regex);
+	        if(text.length() == 0)
+	            return false;
+	        else if(pattern.charAt(0) != text.charAt(0) && pattern.charAt(0) != '.')
+	            return false;
+	        else
+	            return isMatch(text.substring(1), pattern.substring(1));
 	    }
-	    if(regex.charAt(regexIdx) == '?' || regex.charAt(regexIdx) == str.charAt(strIdx))
-	        return match(strIdx+1, str, regexIdx+1, regex);
-
-	    if(regex.charAt(regexIdx) == '*')
+	    else
 	    {
-	        return match(strIdx+1, str, regexIdx, regex) ||
-	                match(strIdx, str, regexIdx+1, regex);
+	        if(isMatch(text, pattern.substring(2)))
+	            return true;
+	        
+	        int i = 0;
+	        while( i < text.length() && (pattern.charAt(0) == '.' || pattern.charAt(0) == text.charAt(i)) )
+	        {
+	            if(isMatch(text.substring(i+1), pattern.substring(2)))
+	                return true;
+	            i++;
+	        }
+	        return false;
 	    }
-	    return false;
 	}
 	
 	public static void main(String[] args)
 	{
-		System.out.println(match(0, "aa", 0, "?a+"));
+		System.out.println(isMatch("aab",".*"));
 	}
 }
