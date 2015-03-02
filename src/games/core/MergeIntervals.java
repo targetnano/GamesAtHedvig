@@ -17,19 +17,19 @@ public class MergeIntervals
 	    Collections.sort(intervals, new IntervalComparator());
 	    
 	    List<Interval> result = new ArrayList<Interval>();
-	    Interval curInterval = intervals.get(0);
+	    Interval prevInterval = intervals.get(0);
 	    for(int i = 1; i < intervals.size(); i++)
 	    {
-	        Interval interval = intervals.get(i);
-	        if(interval.left() > curInterval.right())
+	        Interval curInterval = intervals.get(i);
+	        if(curInterval.left() > prevInterval.right())
 	        {
-	            result.add(curInterval);
-	            curInterval = interval;
+	            result.add(prevInterval);
+	            prevInterval = curInterval;
 	        }
 	        else
-	            curInterval = new Interval(curInterval.left(), Math.max(curInterval.right(), interval.right()));
+	            prevInterval = new Interval(prevInterval.left(), Math.max(prevInterval.right(), curInterval.right()));
 	    }
-	    result.add(curInterval);
+	    result.add(prevInterval);
 	    return result;
 	}
 	

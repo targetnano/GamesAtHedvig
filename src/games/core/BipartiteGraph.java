@@ -23,7 +23,7 @@ public class BipartiteGraph
 	        List<GraphNode<Integer>> list = n.neighbors();
 	        for(GraphNode<Integer> neighbor : list)
 	        {
-	            if(neighbor.color() == myColor)
+	            if(neighbor.color().equals(myColor))
 	                return false;
 
 	            else if(!neighbor.isColored())
